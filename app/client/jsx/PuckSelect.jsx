@@ -5,26 +5,24 @@ import { Avatars } from './avatars.jsx'
 class PuckSelect extends Component {
   constructor (props) {
     super(props)
-    this.state = {
+    this.initialState = {
       columnOpen: false,
       rowOpen: null,
       avatarDesign: '',
       avatarColorway: '',
       opacity: this.props.opacity
     }
-    this.onButtonClick = this.onButtonClick.bind(this)
-    this.onButtonClickReset = this.onButtonClickReset.bind(this)
+    this.state = this.initialState
+    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleButtonClickReset = this.handleButtonClickReset.bind(this)
     this.handleClickDesign = this.handleClickDesign.bind(this)
     this.handleClickColor = this.handleClickColor.bind(this)
   }
 
-  onButtonClick () { this.setState({ columnOpen: true }) }
+  handleButtonClick () { this.setState({ columnOpen: true }) }
 
-  onButtonClickReset () {
-    this.setState({ columnOpen: false })
-    this.setState({ rowOpen: null })
-    this.setState({ avatarDesign: '' })
-    this.setState({ avatarColorway: '' })
+  handleButtonClickReset () {
+    this.setState(this.initialState)
     this.setState({ columnOpen: true })
   }
 
@@ -42,7 +40,6 @@ class PuckSelect extends Component {
 
   render () {
     if (this.state.avatarColorway === '') { // checks whether selection not yet complete
-      // puck list generated from the purple of each design
       let allAvatarDesigns = []
       let allColorwayVariants = []
       let fade = this.props.opacity
@@ -89,14 +86,14 @@ class PuckSelect extends Component {
       }
       return ( // column of singleton nonselected items with at most one of them swapped out for colorway variants row
         <div className='outer'>
-          <input className={fade} type='button' onClick={this.onButtonClick} value='Pick your puck' />
+          <input className={fade} type='button' onClick={this.handleButtonClick} value='Pick your puck' />
           {allAvatarDesigns}
         </div>
       )
     } else {
       return ( // when avatar state isn't null, collapse all and display choice
         <div className='outer'>
-          <input className='fade' type='button' onClick={this.onButtonClickReset} value='Pick your puck' />
+          <input className='fade' type='button' onClick={this.handleButtonClickReset} value='Pick your puck' />
           <div className='spacer' />
           <div><img className='image' src={Avatars[this.state.avatarDesign][this.state.avatarColorway]} /></div>
         </div>
