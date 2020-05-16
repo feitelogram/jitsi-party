@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the Welcome component.
 // -----------------------------------------------------------------------------
-// 
+//
 // body {
 // 	background-image: url('https://party.gbre.org/js/images/cabinfeverhighres.png');
 // }
@@ -25,6 +25,18 @@ h1 {
 input[type="button"] {
 	background-color: #D6D3CD;
 	color: #1B1E1F;
+}
+
+
+.text-entry {
+	padding: 6px 10px !important;
+  border: 2px solid #D6D3CD !important;
+  background-color: #D6D3CD !important;
+  border-radius: 7px !important;
+  color: #1B1E1F !important;
+  outline: none !important;
+  box-shadow: none !important;
+  font-size: 20px !important;
 }
 
 .form {

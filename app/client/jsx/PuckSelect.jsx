@@ -13,10 +13,6 @@ class PuckSelect extends Component {
       opacity: this.props.opacity
     }
     this.state = this.initialState
-    this.handleButtonClick = this.handleButtonClick.bind(this)
-    this.handleButtonClickReset = this.handleButtonClickReset.bind(this)
-    this.handleClickDesign = this.handleClickDesign.bind(this)
-    this.handleClickColor = this.handleClickColor.bind(this)
   }
 
   handleButtonClick () { this.setState({ columnOpen: true }) }
@@ -56,7 +52,7 @@ class PuckSelect extends Component {
 
             return ( // returns single instance of each nonselected design
               <PuckBox
-                handleClick={handleClick}
+                handleClick={handleClick.bind(this)}
                 key={key}
                 image={Avatars[key].purple}
                 style='box'
@@ -69,7 +65,7 @@ class PuckSelect extends Component {
               const handleClick = () => this.handleClickColor(variantKey, colorIndex)
               return ( // returns all colorways for selected design
                 <PuckBox
-                  handleClick={handleClick}
+                  handleClick={handleClick.bind(this)}
                   key={variantKey}
                   image={Avatars[key][variantKey]}
                   imageStyle={selected}
@@ -86,14 +82,14 @@ class PuckSelect extends Component {
       }
       return ( // column of singleton nonselected items with at most one of them swapped out for colorway variants row
         <div className='outer'>
-          <input className={fade} type='button' onClick={this.handleButtonClick} value='Pick your puck' />
+          <input className={fade} type='button' onClick={this.handleButtonClick.bind(this)} value='Pick your puck' />
           {allAvatarDesigns}
         </div>
       )
     } else {
       return ( // when avatar state isn't null, collapse all and display choice
         <div className='outer'>
-          <input className='fade' type='button' onClick={this.handleButtonClickReset} value='Pick your puck' />
+          <input className='fade' type='button' onClick={this.handleButtonClickReset.bind(this)} value='Pick your puck' />
           <div className='spacer' />
           <div><img className='image' src={Avatars[this.state.avatarDesign][this.state.avatarColorway]} /></div>
         </div>
