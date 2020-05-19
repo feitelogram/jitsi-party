@@ -35,21 +35,20 @@ class PuckSelect extends Component {
   }
 
   render () {
+    console.log = console.warn = console.error = () => {}
     if (this.state.avatarColorway === '') { // checks whether selection not yet complete
       let allAvatarDesigns = []
       let allColorwayVariants = []
       let fade = this.props.opacity
-
       if (this.state.columnOpen) { // checks whether selection begun by clicking button, opening column
         fade = 'fade'
         allAvatarDesigns = Object.keys(Avatars).map((key, index) => {
           if (this.state.rowOpen !== index) { // checks each item in column for whether selected
-            const handleClick = () => this.handleClickDesign(key, index)
             let imageTransparency = 'image'
             if (this.state.rowOpen !== null && this.state.rowOpen !== index) {
               imageTransparency = 'non-selected-image'
             }
-
+            const handleClick = () => this.handleClickDesign(key, index)
             return ( // returns single instance of each nonselected design
               <PuckBox
                 handleClick={handleClick.bind(this)}
@@ -66,7 +65,7 @@ class PuckSelect extends Component {
               return ( // returns all colorways for selected design
                 <PuckBox
                   handleClick={handleClick.bind(this)}
-                  key={variantKey}
+                  key={`${key} ${variantKey}`}
                   image={Avatars[key][variantKey]}
                   imageStyle={selected}
                 />
